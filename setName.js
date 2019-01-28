@@ -1,10 +1,15 @@
 const puppeteer = require('puppeteer')
 
+async function printDots() {
+    process.stdout.write(".")
+}
+
 async function main() {
 
     const newname = process.argv[2]
     console.log(newname)
-    console.log("Posting uncensored hentai...")
+    process.stdout.write("Posting uncensored hentai")
+    let pid = setInterval(printDots,750)
     const browser = await puppeteer.launch()
     const page = await browser.newPage()
     await page.setViewport({width:1920,height:1080})
@@ -29,6 +34,8 @@ async function main() {
 
     await page.screenshot({path:'bbrian.png'})
     await browser.close()
+    clearInterval(pid)
+    console.log()
     console.log("Check the output faggot")
 }
 
